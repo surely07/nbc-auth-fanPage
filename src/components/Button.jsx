@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { members } from "common/members";
 import { useDispatch } from "react-redux";
-import { setMember } from "redux/modules/member";
+import { setMember } from "redux/modules/memberSlice";
 
 function Button() {
   const dispatch = useDispatch();

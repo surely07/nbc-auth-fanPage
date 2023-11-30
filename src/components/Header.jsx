@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMember } from "redux/modules/member";
+import { setMember } from "redux/modules/memberSlice";
 
 function Header() {
   // const selectedMemberName = useSelector((state) => state.members);

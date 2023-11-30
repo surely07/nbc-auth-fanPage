@@ -1,13 +1,5 @@
 {
-  "commentData": [
-    {
-      "createdAt": "2023. 11. 30. 오후 2:04:51",
-      "nickname": "ㄹㄹ",
-      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/36.jpg",
-      "content": "안녕손흥민",
-      "writedTo": "Heung-Min Son",
-      "id": "3d781c65-f935-b285-2cdf-98e2d61e38e1"
-    },
+  "letters": [
     {
       "createdAt": "2023. 11. 30. 오후 2:04:57",
       "nickname": "ㅋㅋㅋㅋㅋㅋㅋㅋ",
@@ -31,6 +23,14 @@
       "content": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
       "writedTo": "James Maddison",
       "id": "16ec69e8-72d4-d49a-f7d7-d8b50031259d"
+    },
+    {
+      "createdAt": "2023. 11. 30. 오후 3:42:17",
+      "nickname": "흥민띠",
+      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/36.jpg",
+      "content": "ㄹㄹㄹㄹㄹ",
+      "writedTo": "Heung-Min Son",
+      "id": "70085a5e-e9ed-c770-b6ec-2960592f3f1b"
     }
   ]
 }

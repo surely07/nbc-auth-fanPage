@@ -3,9 +3,9 @@ import uuid from "react-uuid";
 import axios from "axios";
 import styled from "styled-components";
 import { Btn, BtnArea } from "style/Theme";
-import { addLetter } from "redux/modules/letters";
+import { addLetter } from "redux/modules/lettersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setMember } from "redux/modules/member";
+import { setMember } from "redux/modules/memberSlice";
 
 function InputBox() {
   const selectedMemberName = useSelector((state) => state.member);
@@ -33,8 +33,8 @@ function InputBox() {
     if (!name || !comment) {
       alert("닉네임과 내용을 모두 입력하세요!");
     } else {
-      await axios.post("http://localhost:3001/commentData", newComment);
-      await axios.get("http://localhost:3001/commentData");
+      await axios.post("http://localhost:3001/letters", newComment);
+      await axios.get("http://localhost:3001/letters");
 
       dispatch(addLetter(newComment));
       setName("");

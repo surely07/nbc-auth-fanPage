@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { Btn, BtnArea } from "style/Theme";
 import { useDispatch } from "react-redux";
-import { setLetter } from "redux/modules/letters";
+import { setLetter } from "redux/modules/lettersSlice";
 
 function DetailBtn({ comment, editedContent, setEditedContent, id }) {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ function DetailBtn({ comment, editedContent, setEditedContent, id }) {
     const answer = window.confirm("정말로 삭제하시겠습니까?");
     if (!answer) return;
 
-    await axios.delete(`http://localhost:3001/commentData/${id}`);
-    const response = await axios.get("http://localhost:3001/commentData");
+    await axios.delete(`http://localhost:3001/letters/${id}`);
+    const response = await axios.get("http://localhost:3001/letters");
     navigate("/");
     dispatch(setLetter(response.data));
   };
@@ -28,12 +28,12 @@ function DetailBtn({ comment, editedContent, setEditedContent, id }) {
       return;
     }
     //  db 변경
-    await axios.patch(`http://localhost:3001/commentData/${id}`, {
+    await axios.patch(`http://localhost:3001/letters/${id}`, {
       content: editedContent,
     });
 
     // 최신 db 불러오기
-    const response = await axios.get("http://localhost:3001/commentData");
+    const response = await axios.get("http://localhost:3001/letters");
     dispatch(setLetter(response.data));
     setIsEditing(false);
   };
