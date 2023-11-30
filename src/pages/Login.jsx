@@ -1,54 +1,99 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  logIn,
+  setUserId,
+  setUserPassword,
+  setUserNickName,
+  SignUp,
+} from "redux/modules/authSlice";
 import styled from "styled-components";
 
 function Login() {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isSignedUp, userId, userPassword, userNickName } = useSelector(
+    (state) => state.auth
+  );
+  const navigate = useNavigate();
 
-  //   const member = useSelector();
-  //   console.log(member);
-
-  const onLoginButtonHandler = (e) => {
+  const onLogInButtonHandler = (e) => {
     e.preventDefault();
-    alert("로그인");
+    dispatch(logIn());
+    navigate("/");
+    // dispatch(setUserId(""));
+    // dispatch(setUserPassword(""));
+    // dispatch(setUserNickName(""));
+  };
+
+  const onSignUpButtonHandler = (e) => {
+    e.preventDefault();
+    // dispatch(SignUp(true));
+  };
+
+  const loginToggleHandler = () => {
+    dispatch(SignUp());
   };
 
   return (
     <StLoginContainer>
-      <label>로그인</label>
-      <StLoginForm onSubmit={onLoginButtonHandler}>
+      <label> {isSignedUp ? "로그인" : "회원가입"}</label>
+      <StLoginForm
+        onSubmit={isSignedUp ? onLogInButtonHandler : onSignUpButtonHandler}
+      >
         <input
           autoFocus
-          //   value={userId}
-          //   onChange={(e) => setUserId(e.target.value)}
+          value={userId}
+          onChange={(e) => dispatch(setUserId(e.target.value))}
           type="text"
           placeholder="아이디 (4~10글자)"
           minLength={4}
           maxLength={10}
         />
         <input
-          //   value={userPassword}
-          //   onChange={(e) => setUserPassword(e.target.value)}
+          value={userPassword}
+          onChange={(e) => dispatch(setUserPassword(e.target.value))}
           type="text"
           placeholder="비밀번호 (4~15글자)"
           minLength={4}
           maxLength={15}
         />
-        {!isSubscribed && (
+        {!isSignedUp && (
           <input
-            // value={userPassword}
-            // onChange={setUserPassword((e) => e.target.value)}
+            value={userPassword}
+            onChange={setUserNickName((e) => e.target.value)}
             type="text"
             placeholder="닉네임 (4~10글자)"
             minLength={1}
             maxLength={10}
           />
         )}
-        <button type="submit" disabled={!userId || !userPassword}>
-          {isSubscribed ? "로그인" : "회원가입"}
-        </button>
-        <p>{isSubscribed ? "회원가입" : "로그인"}</p>
+
+        {isSignedUp ? (
+          <StLoginWrapper>
+            <StLoginBtn type="submit" backgroundColor="#9de757">
+              로그인
+            </StLoginBtn>
+            <StLoginBtn
+              onClick={loginToggleHandler}
+              backgroundColor="lightgray"
+            >
+              회원가입
+            </StLoginBtn>
+          </StLoginWrapper>
+        ) : (
+          <StLoginWrapper>
+            <StLoginBtn type="sbmit" backgroundColor="#9de757">
+              회원가입
+            </StLoginBtn>
+            <StLoginBtn
+              onClick={loginToggleHandler}
+              backgroundColor="lightgray"
+            >
+              로그인
+            </StLoginBtn>
+          </StLoginWrapper>
+        )}
       </StLoginForm>
     </StLoginContainer>
   );
@@ -80,10 +125,19 @@ const StLoginForm = styled.form`
     height: 40px;
     padding: 5px;
   }
-  & button {
-    height: 50px;
-    border: none;
-    border-radius: 3px;
-    background-color: #9de757;
-  }
+`;
+
+const StLoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+const StLoginBtn = styled.button`
+  height: 45px;
+  border: none;
+  border-radius: 3px;
+  background-color: ${(props) => props.backgroundColor};
+  cursor: pointer;
 `;
