@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { __getLetters } from "redux/modules/lettersSlice";
 
 function LettersList() {
-  const letters = useSelector((state) => state.letters);
-  const selectedMemberName = useSelector((state) => state.member);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { letters, isLoading, error } = useSelector((state) => state.letters);
+  const selectedMemberName = useSelector((state) => state.member);
+
+  useEffect(() => {
+    dispatch(__getLetters());
+  }, [dispatch]);
+
+  console.log(letters);
   const filteredComments =
     selectedMemberName !== "all"
       ? letters.filter((comment) => comment.writedTo === selectedMemberName)
       : letters;
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <CommentWindow>

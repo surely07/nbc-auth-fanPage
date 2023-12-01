@@ -8,7 +8,6 @@ import { setLetter } from "redux/modules/lettersSlice";
 
 function DetailBtn({ comment, editedContent, setEditedContent, id }) {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -18,6 +17,7 @@ function DetailBtn({ comment, editedContent, setEditedContent, id }) {
 
     await axios.delete(`http://localhost:3001/letters/${id}`);
     const response = await axios.get("http://localhost:3001/letters");
+
     navigate("/");
     dispatch(setLetter(response.data));
   };

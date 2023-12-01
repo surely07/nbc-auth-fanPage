@@ -12,7 +12,7 @@ import styled from "styled-components";
 
 function Login() {
   const dispatch = useDispatch();
-  const { isSignedUp, userId, userPassword, userNickName } = useSelector(
+  const { isSignedUp, userId, userPassword } = useSelector(
     (state) => state.auth
   );
   const navigate = useNavigate();

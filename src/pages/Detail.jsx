@@ -4,13 +4,19 @@ import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
 import DetailBtn from "components/DetailBtn";
 import { useSelector } from "react-redux";
+// import { __getLetters } from "redux/modules/lettersSlice";
 
 function Detail() {
   const { id } = useParams();
   const [editedContent, setEditedContent] = useState("");
-  const letters = useSelector((state) => state.letters);
-  const selectedComment = letters.find((comment) => comment.id === id);
+  const { letters } = useSelector((state) => state.letters);
+  // const dispatch = useDispatch();
 
+  // dispatch(__getLetters());
+
+  // console.log(letters);
+  const selectedComment = letters.find((comment) => comment.id === id);
+  // console.log(selectedComment);
   return (
     <div>
       {selectedComment && (
