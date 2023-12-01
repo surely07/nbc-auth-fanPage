@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
-import { useDispatch, useSelector } from "react-redux";
-import { __getLetters } from "redux/modules/lettersSlice";
+import { useSelector } from "react-redux";
 
 function LettersList() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { letters, isLoading, error } = useSelector((state) => state.letters);
   const selectedMemberName = useSelector((state) => state.member);
 
-  useEffect(() => {
-    dispatch(__getLetters());
-  }, [dispatch]);
-
-  console.log(letters);
   const filteredComments =
     selectedMemberName !== "all"
       ? letters.filter((comment) => comment.writedTo === selectedMemberName)

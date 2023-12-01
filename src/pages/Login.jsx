@@ -1,4 +1,5 @@
 import React from "react";
+// import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,25 +10,84 @@ import {
   SignUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
+import { login } from "apis/login";
 
 function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSignedUp, userId, userPassword } = useSelector(
+  const { isSignedUp, userId, userPassword, userNickName } = useSelector(
     (state) => state.auth
   );
-  const navigate = useNavigate();
 
-  const onLogInButtonHandler = (e) => {
+  // const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+  // const cookies = new Cookies();
+
+  // const requestLogin = async (id, password) => {
+  //   return await axios.post(
+  //     `${BASE_URL}/login`,
+  //     {
+  //       id: userId,
+  //       password: userPassword,
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  //   .then((response) => {
+  //     axios.defaults.headers.common[
+  //       "Authorization"
+  //     ] = `Baarer ${response.data.access_token}`;
+  //     return response.data
+  //   })
+  //   .catch((e) => {
+  //     console.log(e.response.data);
+  //     return "이메일 혹은 비밀번호를 확인하세요"
+  //   })
+  // };
+
+  const onLogInButtonHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await login(userId, userPassword);
+
+      // Check if the login was successful
+      if (response && response.accessToken) {
+        localStorage.setItem("accessToken", response.accessToken);
+        dispatch(logIn());
+        navigate("/");
+      } else {
+        // Handle unsuccessful login (show an error message or take appropriate action)
+        console.error("Login failed: Invalid response from the server");
+      }
+    } catch (error) {
+      // Handle login error (show an error message or take appropriate action)
+      console.error("Login failed :", error);
+    }
+
+    // try {
+    //   const response = await login(userId, userPassword);
+    //   console.log(response);
+    //   const { accessToken } = response;
+    //   localStorage.setItem("accessToken", accessToken);
+
     dispatch(logIn());
     navigate("/");
-    // dispatch(setUserId(""));
+    // } catch (error) {
+    //   console.error("Login failed :", error);
+    // }
+
+    // dispatch(setUserId(userId));
+    // dispatch(setUserPassword(userPassword));
+    // dispatch(setUserNickName(userNickName));
+    // console.log("login response :", response);
+
     // dispatch(setUserPassword(""));
-    // dispatch(setUserNickName(""));
   };
 
   const onSignUpButtonHandler = (e) => {
     e.preventDefault();
+    navigate("/");
     // dispatch(SignUp(true));
   };
 
@@ -53,17 +113,17 @@ function Login() {
         <input
           value={userPassword}
           onChange={(e) => dispatch(setUserPassword(e.target.value))}
-          type="text"
+          type="password"
           placeholder="비밀번호 (4~15글자)"
           minLength={4}
           maxLength={15}
         />
         {!isSignedUp && (
           <input
-            value={userPassword}
-            onChange={setUserNickName((e) => e.target.value)}
+            value={userNickName}
+            onChange={(e) => dispatch(setUserNickName(e.target.value))}
             type="text"
-            placeholder="닉네임 (4~10글자)"
+            placeholder="닉네임 (1~10글자)"
             minLength={1}
             maxLength={10}
           />
@@ -74,27 +134,24 @@ function Login() {
             <StLoginBtn type="submit" backgroundColor="#9de757">
               로그인
             </StLoginBtn>
-            <StLoginBtn
-              onClick={loginToggleHandler}
-              backgroundColor="lightgray"
-            >
-              회원가입
-            </StLoginBtn>
           </StLoginWrapper>
         ) : (
           <StLoginWrapper>
             <StLoginBtn type="sbmit" backgroundColor="#9de757">
               회원가입
             </StLoginBtn>
-            <StLoginBtn
-              onClick={loginToggleHandler}
-              backgroundColor="lightgray"
-            >
-              로그인
-            </StLoginBtn>
           </StLoginWrapper>
         )}
       </StLoginForm>
+      {isSignedUp ? (
+        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
+          회원가입
+        </StLoginBtn>
+      ) : (
+        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
+          로그인
+        </StLoginBtn>
+      )}
     </StLoginContainer>
   );
 }

@@ -8,6 +8,25 @@ const initialState = {
   isLoggedIn: false,
 };
 
+// const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+
+// export const __loginData = createAsyncThunk(
+//   "loginData",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const response = await axios.post(`${BASE_URL}/login`);
+//       const accessToken = response.data.token;
+//       setCookie("is_login", `${accessToken}`);
+//       console.log("response :", response);
+
+//       return thunkAPI.fulfillWithValue(response.data);
+//     } catch (error) {
+//       console.log("error :", error);
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -16,13 +35,13 @@ const authSlice = createSlice({
       state.isSignedUp = !state.isSignedUp;
     },
     logIn: (state, action) => {
-      state.isLoggedIn = !state.isLoggedIn;
+      return { ...state, isLoggedIn: !state.isLoggedIn };
     },
     setUserId: (state, action) => {
       state.userId = action.payload;
     },
     setUserNickName: (state, action) => {
-      state.userId = action.payload;
+      state.userNickName = action.payload;
     },
     setUserPassword: (state, action) => {
       state.userPassword = action.payload;

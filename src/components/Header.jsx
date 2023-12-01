@@ -1,15 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMember } from "redux/modules/memberSlice";
+import { logIn } from "redux/modules/authSlice";
 
 function Header() {
   // const selectedMemberName = useSelector((state) => state.members);
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.letters);
+
+  const onLogOutButtonHandler = () => {
+    dispatch(logIn());
+  };
 
   return (
     <HeaderBox>
+      <button onClick={onLogOutButtonHandler}>로그아웃</button>
       <StLink to="/" onClick={() => dispatch(setMember("all"))}>
         <HeaderFont>Tottenham Hotspur Fan Page</HeaderFont>
       </StLink>
