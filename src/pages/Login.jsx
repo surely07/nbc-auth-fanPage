@@ -3,14 +3,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  logIn,
   setUserId,
   setUserPassword,
   setUserNickName,
   SignUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
-import { login } from "apis/login";
 
 function Login() {
   const navigate = useNavigate();
@@ -19,70 +17,8 @@ function Login() {
     (state) => state.auth
   );
 
-  // const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
-  // const cookies = new Cookies();
-
-  // const requestLogin = async (id, password) => {
-  //   return await axios.post(
-  //     `${BASE_URL}/login`,
-  //     {
-  //       id: userId,
-  //       password: userPassword,
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  //   .then((response) => {
-  //     axios.defaults.headers.common[
-  //       "Authorization"
-  //     ] = `Baarer ${response.data.access_token}`;
-  //     return response.data
-  //   })
-  //   .catch((e) => {
-  //     console.log(e.response.data);
-  //     return "이메일 혹은 비밀번호를 확인하세요"
-  //   })
-  // };
-
   const onLogInButtonHandler = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await login(userId, userPassword);
-
-      // Check if the login was successful
-      if (response && response.accessToken) {
-        localStorage.setItem("accessToken", response.accessToken);
-        dispatch(logIn());
-        navigate("/");
-      } else {
-        // Handle unsuccessful login (show an error message or take appropriate action)
-        console.error("Login failed: Invalid response from the server");
-      }
-    } catch (error) {
-      // Handle login error (show an error message or take appropriate action)
-      console.error("Login failed :", error);
-    }
-
-    // try {
-    //   const response = await login(userId, userPassword);
-    //   console.log(response);
-    //   const { accessToken } = response;
-    //   localStorage.setItem("accessToken", accessToken);
-
-    dispatch(logIn());
-    navigate("/");
-    // } catch (error) {
-    //   console.error("Login failed :", error);
-    // }
-
-    // dispatch(setUserId(userId));
-    // dispatch(setUserPassword(userPassword));
-    // dispatch(setUserNickName(userNickName));
-    // console.log("login response :", response);
-
-    // dispatch(setUserPassword(""));
   };
 
   const onSignUpButtonHandler = (e) => {
@@ -98,6 +34,7 @@ function Login() {
   return (
     <StLoginContainer>
       <label> {isSignedUp ? "로그인" : "회원가입"}</label>
+
       <StLoginForm
         onSubmit={isSignedUp ? onLogInButtonHandler : onSignUpButtonHandler}
       >
@@ -143,15 +80,9 @@ function Login() {
           </StLoginWrapper>
         )}
       </StLoginForm>
-      {isSignedUp ? (
-        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
-          회원가입
-        </StLoginBtn>
-      ) : (
-        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
-          로그인
-        </StLoginBtn>
-      )}
+      <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
+        {isSignedUp ? "회원가입" : "로그인"}
+      </StLoginBtn>
     </StLoginContainer>
   );
 }
@@ -166,11 +97,12 @@ const StLoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   background-color: white;
   & label {
     font-size: 30px;
     font-weight: 600;
+    margin-bottom: 15px;
   }
 `;
 
