@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 // import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   setUserId,
   setUserPassword,
@@ -18,18 +18,30 @@ function Login() {
   const { isSignedUp, userId, userPassword, userNickName, isLoggedIn } =
     useSelector((state) => state.auth);
 
+  const location = useLocation();
+  const from = location?.state?.redirectedFrom?.pathname || "/";
+
+  const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+
   const onLogInButtonHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "https://moneyfulpublicpolicy.co.kr/login",
-      {
-        id: userId,
-        password: userPassword,
-      }
-    );
-    console.log(response.data);
-    const accessToken = response.data.accessToken;
-    localStorage.setItem("accessToken", accessToken);
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/user`,
+        {
+          id: userId,
+          password: userPassword,
+        },
+        { withCredentials: true }
+      );
+      console.log(response.data);
+      const accessToken = response.data.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+    } catch (error) {
+      console.error("Login request failed :", error);
+    }
+
+    navigate(from);
     dispatch(logIn());
     console.log(isLoggedIn);
   };
