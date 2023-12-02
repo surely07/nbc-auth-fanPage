@@ -1,103 +1,52 @@
+import axios from "axios";
 import React from "react";
 // import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  logIn,
   setUserId,
   setUserPassword,
   setUserNickName,
-  SignUp,
+  signUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
-import { login } from "apis/login";
+import { logIn } from "redux/modules/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSignedUp, userId, userPassword, userNickName } = useSelector(
-    (state) => state.auth
-  );
-
-  // const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
-  // const cookies = new Cookies();
-
-  // const requestLogin = async (id, password) => {
-  //   return await axios.post(
-  //     `${BASE_URL}/login`,
-  //     {
-  //       id: userId,
-  //       password: userPassword,
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  //   .then((response) => {
-  //     axios.defaults.headers.common[
-  //       "Authorization"
-  //     ] = `Baarer ${response.data.access_token}`;
-  //     return response.data
-  //   })
-  //   .catch((e) => {
-  //     console.log(e.response.data);
-  //     return "이메일 혹은 비밀번호를 확인하세요"
-  //   })
-  // };
+  const { isSignedUp, userId, userPassword, userNickName, isLoggedIn } =
+    useSelector((state) => state.auth);
 
   const onLogInButtonHandler = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await login(userId, userPassword);
-
-      // Check if the login was successful
-      if (response && response.accessToken) {
-        localStorage.setItem("accessToken", response.accessToken);
-        dispatch(logIn());
-        navigate("/");
-      } else {
-        // Handle unsuccessful login (show an error message or take appropriate action)
-        console.error("Login failed: Invalid response from the server");
+    const response = await axios.post(
+      "https://moneyfulpublicpolicy.co.kr/login",
+      {
+        id: userId,
+        password: userPassword,
       }
-    } catch (error) {
-      // Handle login error (show an error message or take appropriate action)
-      console.error("Login failed :", error);
-    }
-
-    // try {
-    //   const response = await login(userId, userPassword);
-    //   console.log(response);
-    //   const { accessToken } = response;
-    //   localStorage.setItem("accessToken", accessToken);
-
+    );
+    console.log(response.data);
+    const accessToken = response.data.accessToken;
+    localStorage.setItem("accessToken", accessToken);
     dispatch(logIn());
-    navigate("/");
-    // } catch (error) {
-    //   console.error("Login failed :", error);
-    // }
-
-    // dispatch(setUserId(userId));
-    // dispatch(setUserPassword(userPassword));
-    // dispatch(setUserNickName(userNickName));
-    // console.log("login response :", response);
-
-    // dispatch(setUserPassword(""));
+    console.log(isLoggedIn);
   };
 
   const onSignUpButtonHandler = (e) => {
     e.preventDefault();
     navigate("/");
-    // dispatch(SignUp(true));
   };
 
   const loginToggleHandler = () => {
-    dispatch(SignUp());
+    dispatch(signUp());
   };
 
   return (
     <StLoginContainer>
       <label> {isSignedUp ? "로그인" : "회원가입"}</label>
+
       <StLoginForm
         onSubmit={isSignedUp ? onLogInButtonHandler : onSignUpButtonHandler}
       >
@@ -131,27 +80,17 @@ function Login() {
 
         {isSignedUp ? (
           <StLoginWrapper>
-            <StLoginBtn type="submit" backgroundColor="#9de757">
-              로그인
-            </StLoginBtn>
+            <StLoginBtn type="submit">로그인</StLoginBtn>
           </StLoginWrapper>
         ) : (
           <StLoginWrapper>
-            <StLoginBtn type="sbmit" backgroundColor="#9de757">
-              회원가입
-            </StLoginBtn>
+            <StLoginBtn type="sbmit">회원가입</StLoginBtn>
           </StLoginWrapper>
         )}
       </StLoginForm>
-      {isSignedUp ? (
-        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
-          회원가입
-        </StLoginBtn>
-      ) : (
-        <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
-          로그인
-        </StLoginBtn>
-      )}
+      <StLoginBtn onClick={loginToggleHandler} $backgroundColor="lightgray">
+        {isSignedUp ? "회원가입" : "로그인"}
+      </StLoginBtn>
     </StLoginContainer>
   );
 }
@@ -166,11 +105,12 @@ const StLoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   background-color: white;
   & label {
     font-size: 30px;
     font-weight: 600;
+    margin-bottom: 15px;
   }
 `;
 
@@ -195,6 +135,7 @@ const StLoginBtn = styled.button`
   height: 45px;
   border: none;
   border-radius: 3px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) =>
+    props.$backgroundColor ? props.$backgroundColor : "#9de757"};
   cursor: pointer;
 `;
