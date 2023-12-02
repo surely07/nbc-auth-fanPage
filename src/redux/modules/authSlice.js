@@ -48,7 +48,7 @@ const authSlice = createSlice({
       state.isSignedUp = !state.isSignedUp;
     },
     logIn: (state, action) => {
-      state.isLoggedIn = action.payload;
+      state.isLoggedIn = !state.isLoggedIn;
     },
     setUserId: (state, action) => {
       state.userId = action.payload;
