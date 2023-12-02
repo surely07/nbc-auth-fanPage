@@ -1,11 +1,12 @@
-const { useSelector } = require("react-redux");
-const { useLocation, Navigate } = require("react-router-dom");
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const currentLocation = useLocation();
 
-  return isLoggedIn ? (
+  return !isLoggedIn ? (
     <>{children}</>
   ) : (
     <Navigate
@@ -15,5 +16,13 @@ const ProtectedRoute = ({ children }) => {
     />
   );
 };
+
+// const PrivateRoute = ({ authenticated, component: Component }) => {
+//   return authenticated ? (
+//     Component
+//   ) : (
+//     <Navigate to="/login" {...alert("로그인이 필요합니다.")}></Navigate>
+//   );
+// };
 
 export default ProtectedRoute;
