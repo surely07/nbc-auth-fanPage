@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   isSignedUp: true,
@@ -8,24 +9,22 @@ const initialState = {
   isLoggedIn: false,
 };
 
-// const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
 
-// export const __loginData = createAsyncThunk(
-//   "loginData",
-//   async (payload, thunkAPI) => {
-//     try {
-//       const response = await axios.post(`${BASE_URL}/login`);
-//       const accessToken = response.data.token;
-//       setCookie("is_login", `${accessToken}`);
-//       console.log("response :", response);
+export const __login = createAsyncThunk("login", async (payload, thunkAPI) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/login`);
+    console.log("response :", response);
 
-//       return thunkAPI.fulfillWithValue(response.data);
-//     } catch (error) {
-//       console.log("error :", error);
-//       return thunkAPI.rejectWithValue(error);
-//     }
-//   }
-// );
+    const accessToken = response.data.token;
+    setCookie("is_login", `${accessToken}`);
+
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    console.log("error :", error);
+    return thunkAPI.rejectWithValue(error);
+  }
+});
 
 const authSlice = createSlice({
   name: "auth",
