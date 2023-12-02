@@ -12,11 +12,11 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="detail/:id" element={<Detail />} />
         <Route path="login" element={<Login />} />
         {/* 로그인 전용 */}
         <Route element={<ProtectedRoute />}>
+          <Route index path="/" element={<Home />} />
+          <Route path="detail/:id" element={<Detail />} />
           <Route path="profile/:id" element={<Profile />} />
         </Route>
       </Routes>
