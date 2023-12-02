@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 // import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,29 +7,40 @@ import {
   setUserId,
   setUserPassword,
   setUserNickName,
-  SignUp,
+  signUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
+import { logIn } from "redux/modules/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSignedUp, userId, userPassword, userNickName } = useSelector(
-    (state) => state.auth
-  );
+  const { isSignedUp, userId, userPassword, userNickName, isLoggedIn } =
+    useSelector((state) => state.auth);
 
   const onLogInButtonHandler = async (e) => {
     e.preventDefault();
+    const response = await axios.post(
+      "https://moneyfulpublicpolicy.co.kr/login",
+      {
+        id: userId,
+        password: userPassword,
+      }
+    );
+    console.log(response.data);
+    const accessToken = response.data.accessToken;
+    localStorage.setItem("accessToken", accessToken);
+    dispatch(logIn());
+    console.log(isLoggedIn);
   };
 
   const onSignUpButtonHandler = (e) => {
     e.preventDefault();
     navigate("/");
-    // dispatch(SignUp(true));
   };
 
   const loginToggleHandler = () => {
-    dispatch(SignUp());
+    dispatch(signUp());
   };
 
   return (
@@ -76,7 +88,7 @@ function Login() {
           </StLoginWrapper>
         )}
       </StLoginForm>
-      <StLoginBtn onClick={loginToggleHandler} backgroundColor="lightgray">
+      <StLoginBtn onClick={loginToggleHandler} $backgroundColor="lightgray">
         {isSignedUp ? "회원가입" : "로그인"}
       </StLoginBtn>
     </StLoginContainer>
@@ -124,6 +136,6 @@ const StLoginBtn = styled.button`
   border: none;
   border-radius: 3px;
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "#9de757"};
+    props.$backgroundColor ? props.$backgroundColor : "#9de757"};
   cursor: pointer;
 `;
