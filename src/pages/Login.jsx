@@ -20,18 +20,44 @@ function Login() {
 
   const onLogInButtonHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "https://moneyfulpublicpolicy.co.kr/login",
-      {
-        id: userId,
-        password: userPassword,
+    const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/login`,
+        {
+          id: userId,
+          password: userPassword,
+        }
+        // { withCredentials: true }
+      );
+
+      const accessToken = response.data.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+      console.log(accessToken);
+
+      const getUser = await axios.get(`${BASE_URL}/user`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const { id, nickname } = getUser.data;
+
+      if (accessToken) {
+        dispatch(logIn());
+        dispatch(setUserId(id));
+        dispatch(setUserNickName(nickname));
+
+        setTimeout(() => {
+          console.log(isLoggedIn);
+          navigate("/");
+        }, 0);
       }
-    );
-    console.log(response.data);
-    const accessToken = response.data.accessToken;
-    localStorage.setItem("accessToken", accessToken);
-    dispatch(logIn());
-    console.log(isLoggedIn);
+    } catch (error) {
+      console.error("로그인 실패 :", error);
+      alert("아이디와 패스워드를 바르게 입력하세요.");
+    }
   };
 
   const onSignUpButtonHandler = (e) => {
@@ -41,16 +67,18 @@ function Login() {
 
   const loginToggleHandler = () => {
     dispatch(signUp());
+    console.log(isSignedUp);
   };
 
   return (
     <StLoginContainer>
-      <label> {isSignedUp ? "로그인" : "회원가입"}</label>
+      <label htmlFor="login-id"> {isSignedUp ? "로그인" : "회원가입"}</label>
 
       <StLoginForm
         onSubmit={isSignedUp ? onLogInButtonHandler : onSignUpButtonHandler}
       >
         <input
+          id="login-id"
           autoFocus
           value={userId}
           onChange={(e) => dispatch(setUserId(e.target.value))}
@@ -60,6 +88,7 @@ function Login() {
           maxLength={10}
         />
         <input
+          id="login-password"
           value={userPassword}
           onChange={(e) => dispatch(setUserPassword(e.target.value))}
           type="password"
@@ -69,6 +98,7 @@ function Login() {
         />
         {!isSignedUp && (
           <input
+            id="login-nickname"
             value={userNickName}
             onChange={(e) => dispatch(setUserNickName(e.target.value))}
             type="text"
