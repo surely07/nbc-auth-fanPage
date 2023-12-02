@@ -68,15 +68,11 @@ function Login() {
 
         {isSignedUp ? (
           <StLoginWrapper>
-            <StLoginBtn type="submit" backgroundColor="#9de757">
-              로그인
-            </StLoginBtn>
+            <StLoginBtn type="submit">로그인</StLoginBtn>
           </StLoginWrapper>
         ) : (
           <StLoginWrapper>
-            <StLoginBtn type="sbmit" backgroundColor="#9de757">
-              회원가입
-            </StLoginBtn>
+            <StLoginBtn type="sbmit">회원가입</StLoginBtn>
           </StLoginWrapper>
         )}
       </StLoginForm>
@@ -127,6 +123,7 @@ const StLoginBtn = styled.button`
   height: 45px;
   border: none;
   border-radius: 3px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "#9de757"};
   cursor: pointer;
 `;
