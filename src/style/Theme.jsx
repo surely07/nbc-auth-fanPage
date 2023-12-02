@@ -44,8 +44,11 @@ export const Btn = styled.button`
   width: 80px;
   height: 30px;
   border: none;
-  background-color: #9de757;
-  color: #0b0e1e;
+  background-color: ${(props) =>
+    props.$backgroundColor ? props.$backgroundColor : "#9de757"};
+  color: ${(props) => (props.color ? props.color : "#0b0e1e")};
+  border-radius: ${(props) =>
+    props.$borderRadius ? props.$borderRadius : "none"};
 `;
 
 export const CommentInfoBox = styled.div`
