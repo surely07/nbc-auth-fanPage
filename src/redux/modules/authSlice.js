@@ -7,7 +7,7 @@ const initialState = {
   userId: "",
   userPassword: "",
   userNickName: "",
-  isLoggedIn: false,
+  isLoggedIn: true,
   // },
   // isLoading: false,
   // isError: false,
@@ -48,7 +48,7 @@ const authSlice = createSlice({
       state.isSignedUp = !state.isSignedUp;
     },
     logIn: (state, action) => {
-      state.isLoggedIn = true;
+      state.isLoggedIn = action.payload;
     },
     setUserId: (state, action) => {
       state.userId = action.payload;

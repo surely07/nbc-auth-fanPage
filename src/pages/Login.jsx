@@ -37,8 +37,10 @@ function Login() {
       console.log(response.data);
       const accessToken = response.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
+      dispatch(logIn());
+      console.log(isLoggedIn);
     } catch (error) {
-      console.error("Login request failed :", error);
+      console.error("로그인 실패 :", error);
     }
 
     navigate(from);

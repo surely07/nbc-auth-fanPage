@@ -19,7 +19,7 @@ const Router = () => {
     const currentLocation = useLocation();
 
     return isLoggedIn ? (
-      <Routes>{children}</Routes>
+      <>{children}</>
     ) : (
       <Navigate
         to={"/login"}
@@ -36,7 +36,7 @@ const Router = () => {
         <Route path="login" element={<Login />} />
         {/* 로그인 전용 */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Home />} />
+          <Route index path="/" element={<Home />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="profile/:id" element={<Profile />} />
         </Route>
