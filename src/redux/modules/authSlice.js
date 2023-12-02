@@ -7,7 +7,7 @@ const initialState = {
   userId: "",
   userPassword: "",
   userNickName: "",
-  isLoggedIn: true,
+  isLoggedIn: false,
   // },
   // isLoading: false,
   // isError: false,

@@ -1,34 +1,13 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "components/Header";
 import Home from "pages/Home";
 import Detail from "pages/Detail";
 import Footer from "components/Footer";
 import Login from "pages/Login";
 import Profile from "pages/Profile";
-import { useSelector } from "react-redux";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Router = () => {
-  const ProtectedRoute = ({ children }) => {
-    const { isLoggedIn } = useSelector((state) => state.auth);
-    const currentLocation = useLocation();
-
-    return isLoggedIn ? (
-      <>{children}</>
-    ) : (
-      <Navigate
-        to={"/login"}
-        replace
-        state={{ redirectedFrom: currentLocation }}
-      />
-    );
-  };
-
   return (
     <BrowserRouter>
       <Header />

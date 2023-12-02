@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useId } from "react";
 // import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,10 +34,12 @@ function Login() {
         },
         { withCredentials: true }
       );
+      console.log(useId);
+      console.log(userPassword);
       console.log(response.data);
       const accessToken = response.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
-      dispatch(logIn());
+      dispatch(logIn(true));
       console.log(isLoggedIn);
     } catch (error) {
       console.error("로그인 실패 :", error);
@@ -59,12 +61,13 @@ function Login() {
 
   return (
     <StLoginContainer>
-      <label> {isSignedUp ? "로그인" : "회원가입"}</label>
-
       <StLoginForm
         onSubmit={isSignedUp ? onLogInButtonHandler : onSignUpButtonHandler}
       >
+        <label htmlFor="input-id">{isSignedUp ? "로그인" : "회원가입"}</label>
+
         <input
+          id="input-id"
           autoFocus
           value={userId}
           onChange={(e) => dispatch(setUserId(e.target.value))}
@@ -74,6 +77,7 @@ function Login() {
           maxLength={10}
         />
         <input
+          id="input-password"
           value={userPassword}
           onChange={(e) => dispatch(setUserPassword(e.target.value))}
           type="password"
@@ -83,6 +87,7 @@ function Login() {
         />
         {!isSignedUp && (
           <input
+            id="input-nickname"
             value={userNickName}
             onChange={(e) => dispatch(setUserNickName(e.target.value))}
             type="text"
