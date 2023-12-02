@@ -1,11 +1,17 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Layout() {
+  const { id } = useParams();
+
   return (
     <div>
-      <p>Home</p>
-      <p>내 프로필</p>
-      <p>로그아웃</p>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/profile/:${id}">내 프로필</Link>
+        <Link to="/login">로그아웃</Link>
+      </nav>
     </div>
   );
 }

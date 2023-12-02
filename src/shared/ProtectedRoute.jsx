@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const currentLocation = useLocation();
 
-  return !isLoggedIn ? (
+  return isLoggedIn ? (
     <Outlet>{children}</Outlet>
   ) : (
     <Navigate
