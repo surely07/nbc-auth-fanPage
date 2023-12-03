@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "common/Avatar";
+import { setMember } from "redux/modules/memberSlice";
 
 function LettersList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { letters, isLoading, error } = useSelector((state) => state.letters);
   const selectedMemberName = useSelector((state) => state.member);
@@ -17,6 +19,10 @@ function LettersList() {
     selectedMemberName !== "all"
       ? letters.filter((comment) => comment.writedTo === selectedMemberName)
       : letters;
+
+  useEffect(() => {
+    dispatch(setMember(selectedMemberName));
+  }, [dispatch, selectedMemberName]);
 
   if (isLoading) {
     return <div>로딩중...</div>;

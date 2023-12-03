@@ -15,7 +15,7 @@ function Profile() {
     return response.data;
   };
 
-  return <div>{userData.id}ddddddd</div>;
+  return <div>{userData.id}프로필페이지!!!</div>;
 }
 
 export default Profile;
