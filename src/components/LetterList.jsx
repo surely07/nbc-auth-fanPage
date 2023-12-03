@@ -13,7 +13,7 @@ function LettersList() {
 
   const { letters, isLoading, error } = useSelector((state) => state.letters);
   const selectedMemberName = useSelector((state) => state.member);
-  const { userNickName } = useSelector((state) => state.auth);
+  // const { userNickName } = useSelector((state) => state.auth);
 
   const filteredComments =
     selectedMemberName !== "all"
@@ -52,7 +52,7 @@ function LettersList() {
                   <CommentInfo>
                     <div>
                       <CommentFont fontSize="15px" fontWeight="500">
-                        {userNickName}
+                        {comment.nickname}
                       </CommentFont>
                       <CommentFont fontSize="11px">
                         {comment.createdAt}

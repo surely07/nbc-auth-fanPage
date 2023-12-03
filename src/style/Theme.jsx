@@ -41,8 +41,9 @@ export const BtnArea = styled.span`
 `;
 
 export const Btn = styled.button`
-  width: 80px;
-  height: 30px;
+  font-weight: 700;
+  width: ${(props) => (props.width ? props.width : "80px")};
+  height: ${(props) => (props.height ? props.height : "30px")};
   border: none;
   cursor: pointer;
   background-color: ${(props) =>

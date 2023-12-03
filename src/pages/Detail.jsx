@@ -10,7 +10,7 @@ function Detail() {
   const { id } = useParams();
   const [editedContent, setEditedContent] = useState("");
   const { letters } = useSelector((state) => state.letters);
-  const { userAvatar } = useSelector((state) => state.auth);
+  // const { userAvatar } = useSelector((state) => state.auth);
 
   const selectedComment = letters.find((comment) => comment.id === id);
 
@@ -19,7 +19,7 @@ function Detail() {
       {selectedComment && (
         <CommentDetailBox key={selectedComment.id}>
           <CommentInfoBox>
-            <Avatar src={userAvatar} size="large" />
+            <Avatar src={selectedComment.avatar} size="large" />
             <CommentInfo>
               <div
                 style={{

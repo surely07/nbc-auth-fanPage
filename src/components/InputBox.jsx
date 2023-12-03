@@ -47,7 +47,7 @@ function InputBox() {
     <div>
       <PostBox onSubmit={commentSubmitHandler} id={comment}>
         <div>
-          <label htmlFor="nickname">닉네임</label>
+          <label>닉네임</label>
           {userNickName}
         </div>
         <div>
