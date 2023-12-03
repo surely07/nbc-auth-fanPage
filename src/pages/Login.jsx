@@ -7,6 +7,7 @@ import {
   setUserId,
   setUserPassword,
   setUserNickName,
+  setUserAvatar,
   signUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
@@ -45,12 +46,14 @@ function Login() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      const { id, nickname } = getUser.data;
+      const { id, nickname, avatar } = getUser.data;
 
       if (accessToken) {
         dispatch(logIn(true));
         dispatch(setUserId(id));
         dispatch(setUserNickName(nickname));
+        dispatch(setUserAvatar(avatar));
+
         console.log(userId);
 
         setTimeout(() => {

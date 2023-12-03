@@ -7,6 +7,7 @@ const initialState = {
   userId: "",
   userPassword: "",
   userNickName: "",
+  userAvatar: null,
   isLoggedIn: false,
   // },
   // isLoading: false,
@@ -59,6 +60,9 @@ const authSlice = createSlice({
     setUserPassword: (state, action) => {
       state.userPassword = action.payload;
     },
+    setUserAvatar: (state, action) => {
+      state.userAvatar = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,5 +84,11 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { signUp, logIn, setUserId, setUserNickName, setUserPassword } =
-  authSlice.actions;
+export const {
+  signUp,
+  logIn,
+  setUserId,
+  setUserNickName,
+  setUserPassword,
+  setUserAvatar,
+} = authSlice.actions;

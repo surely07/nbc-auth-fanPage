@@ -4,11 +4,13 @@ import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
 import DetailBtn from "components/DetailBtn";
 import { useSelector } from "react-redux";
+import Avatar from "common/Avatar";
 
 function Detail() {
   const { id } = useParams();
   const [editedContent, setEditedContent] = useState("");
   const { letters } = useSelector((state) => state.letters);
+  const { userAvatar } = useSelector((state) => state.auth);
 
   const selectedComment = letters.find((comment) => comment.id === id);
 
@@ -17,12 +19,7 @@ function Detail() {
       {selectedComment && (
         <CommentDetailBox key={selectedComment.id}>
           <CommentInfoBox>
-            <figure>
-              <Avatar
-                src={selectedComment.avatar}
-                alt={selectedComment.nickname}
-              ></Avatar>
-            </figure>
+            <Avatar src={userAvatar} size="large" />
             <CommentInfo>
               <div
                 style={{
@@ -32,7 +29,7 @@ function Detail() {
                   lineHeight: "1.3",
                 }}
               >
-                <h3>To.{selectedComment.writedTo}</h3>
+                <h3>To. {selectedComment.writedTo}</h3>
                 <CommentFont fontSize="20px" fontWeight="500">
                   {selectedComment.nickname}
                 </CommentFont>
@@ -67,12 +64,6 @@ const CommentDetailBox = styled.div`
   padding: 30px;
   margin: 50px auto;
   gap: 30px;
-`;
-
-const Avatar = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
 `;
 
 const CommentInfo = styled.div`
