@@ -1,20 +1,41 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { setMember } from "redux/modules/memberSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "redux/modules/authSlice";
 
 function Layout({ children }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const { userId } = useParams();
+  // console.log(userId);
+
+  const { userId } = useSelector((state) => state.auth);
+  // console.log(isLoggedIn);
+
+  const onLogOutHandler = () => {
+    const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("id");
+
+    navigate(`/profile/${userId}`);
+
+    localStorage.clear(token);
+    // window.location.replace('/login')
+    dispatch(logIn(false));
+  };
+
   return (
     <div>
       <StNavigation>
         <Link to="/" onClick={() => dispatch(setMember("all"))}>
           Home
         </Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/login">LogOut</Link>
+        <Link to={`/profile/${userId}`}>Profile</Link>
+        <Link to="/login" onClick={onLogOutHandler}>
+          LogOut
+        </Link>
       </StNavigation>
 
       <Outlet>{children}</Outlet>

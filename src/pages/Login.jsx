@@ -7,6 +7,7 @@ import {
   setUserId,
   setUserPassword,
   setUserNickName,
+  setUserAvatar,
   signUp,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
@@ -34,6 +35,9 @@ function Login() {
 
       const accessToken = response.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("id", response.data.userId);
+      localStorage.setItem("nickname", response.data.nickname);
+      localStorage.setItem("avatar", response.data.avatar);
       console.log(accessToken);
 
       const getUser = await axios.get(`${BASE_URL}/user`, {
@@ -42,12 +46,15 @@ function Login() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      const { id, nickname } = getUser.data;
+      const { id, nickname, avatar } = getUser.data;
 
       if (accessToken) {
-        dispatch(logIn());
+        dispatch(logIn(true));
         dispatch(setUserId(id));
         dispatch(setUserNickName(nickname));
+        dispatch(setUserAvatar(avatar));
+
+        console.log(userId);
 
         setTimeout(() => {
           console.log(isLoggedIn);
@@ -66,7 +73,7 @@ function Login() {
   };
 
   const loginToggleHandler = () => {
-    dispatch(signUp());
+    dispatch(signUp(!isSignedUp));
     console.log(isSignedUp);
   };
 

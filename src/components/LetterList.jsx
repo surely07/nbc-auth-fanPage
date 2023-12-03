@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
 import { useSelector } from "react-redux";
+import Avatar from "common/Avatar";
 
 function LettersList() {
   const navigate = useNavigate();
 
   const { letters, isLoading, error } = useSelector((state) => state.letters);
   const selectedMemberName = useSelector((state) => state.member);
+  const { userNickName } = useSelector((state) => state.auth);
 
   const filteredComments =
     selectedMemberName !== "all"
@@ -38,14 +40,13 @@ function LettersList() {
           <ul key={comment.id}>
             <StyledLink to={`/detail/${comment.id}`}>
               <CommentInfoBox onClick={() => navigate(`/detail/${comment.id}`)}>
-                <figure>
-                  <img src={comment.avatar} alt={comment.nickname}></img>
-                </figure>
+                <Avatar src={comment.avatar} size="small" />
+
                 <div>
                   <CommentInfo>
                     <div>
                       <CommentFont fontSize="15px" fontWeight="500">
-                        {comment.nickname}
+                        {userNickName}
                       </CommentFont>
                       <CommentFont fontSize="11px">
                         {comment.createdAt}
@@ -107,12 +108,6 @@ const CommentWindow = styled.div`
       transform: scale(1.02);
       transition: transform 0.5s;
     }
-  }
-
-  img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
   }
 
   ${StyledLink} {
