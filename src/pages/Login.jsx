@@ -34,6 +34,9 @@ function Login() {
 
       const accessToken = response.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("id", response.data.userId);
+      localStorage.setItem("nickname", response.data.nickname);
+      localStorage.setItem("avatar", response.data.avatar);
       console.log(accessToken);
 
       const getUser = await axios.get(`${BASE_URL}/user`, {
@@ -45,9 +48,10 @@ function Login() {
       const { id, nickname } = getUser.data;
 
       if (accessToken) {
-        dispatch(logIn());
+        dispatch(logIn(true));
         dispatch(setUserId(id));
         dispatch(setUserNickName(nickname));
+        console.log(userId);
 
         setTimeout(() => {
           console.log(isLoggedIn);
@@ -66,7 +70,7 @@ function Login() {
   };
 
   const loginToggleHandler = () => {
-    dispatch(signUp());
+    dispatch(signUp(!isSignedUp));
     console.log(isSignedUp);
   };
 
