@@ -44,6 +44,7 @@ export const Btn = styled.button`
   width: 80px;
   height: 30px;
   border: none;
+  cursor: pointer;
   background-color: ${(props) =>
     props.$backgroundColor ? props.$backgroundColor : "#9de757"};
   color: ${(props) => (props.color ? props.color : "#0b0e1e")};
