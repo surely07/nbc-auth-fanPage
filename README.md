@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Fanpage Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### 소개
+- 토트넘의 회원제 팬페이지로, 회원가입 및 로그인이 된 user들은 선수들에게 팬레터를 작성할 수 있습니다.
+- 프로필 변경(닉네임 및 프로필 이미지)이 가능합니다.
+- 필터를 통해 선택된 선수들의 팬레터만 모아볼 수 있습니다.
+ 
+### 사이트 배포 주소
+[프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app/)
 
-In the project directory, you can run:
+### 사이트 미리보기
+![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/95daa9f9-75e7-44a7-8de3-d1eeb1a8fcad)
+![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/db31f8f8-3b45-45dc-8c95-13ac20901752)
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 기술 스택 및 사용 라이브러리
+- react
+- redux
+- react-router-dom
+- styled-components
+- uuid
+- axios
+- redux toolkit
+- redux thunk
+- json-server
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 프로젝트 설치
 
-### `yarn build`
+### clone repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+git clone https://github.com/surely07/nbc-auth-fanPage.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Install npm dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+yarn
+yarn install
+```
 
-### `yarn eject`
+### Start dev-server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+yarn start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 요구사항
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 필수 구현 사항
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+##### - 홈 화면 UI 수정 (Create, Read)
+- ✔️ 회원가입 시 작성한 닉네임 값으로 팬레터 UI 수정
 
-## Learn More
+##### 상세 화면 UI 구현 (Read, Update, Delete)
+- ❌ 본인이 작성한 게시글에만 수정, 삭제 권한 부여
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### 로그인/회원가입 UI 구현
+- ✔️ 로그인 해야만 Home, Detail, Profile 페이지 접속 가능
+- ✔️ 로그인, 회원가입 창 토글링
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 프로필관리 UI 구현
+- ✔️ Profile 페이지 UI 구현
+- ✔️ 프로필 이미지, 닉네임 수정 기능 구현, 수정 후 letter list에 자동 반영
 
-### Code Splitting
+##### 배포하기
+- ✔️ Vercel 이라는 호스팅플랫폼을 이용해 배포
+- ✔️ 배포에 적용될 브랜치는 redux-thunk 브랜치로 적용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 🔵 추가 구현 사항
+- ❌ 로그인, 회원가입 예외 처리
+- ❌ 비밀번호 찾기 기능
+- ❌ 팔로우, 팔로워 기능
+- ❌ 팔로우한 상대 게시물 확인 기능
+- ❌ 댓글 기능
+- ❌ 좋아요, 북마크 기능
+- ❌ 반응형 웹 구현
+- ❌ 무한스크롤 기능
+- ❌ 더보기 기능
+- ❌ memo, useMemo, useCallback 을 이용한 렌더링 최적화 적용
+- ❌ Vercel 에 배포한 뒤 커스텀 도메인 적용 (500원 정도하는 저렴한 도메인 권장)
