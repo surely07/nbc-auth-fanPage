@@ -7,7 +7,7 @@
       "writedTo": "Eric Dier",
       "id": "d0409656-f43f-b25a-0f45-ad7eae862a5f",
       "userId": "sonny",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/0e291d05-edf3-4c96-a384-6365e3976792.jpg"
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg"
     },
     {
       "createdAt": "2023. 12. 3. 오후 6:23:10",
@@ -16,7 +16,7 @@
       "writedTo": "Eric Dier",
       "id": "f337a731-a355-b302-e559-4c773c77ddc1",
       "userId": "sonny",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/0e291d05-edf3-4c96-a384-6365e3976792.jpg"
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg"
     },
     {
       "createdAt": "2023. 12. 3. 오후 6:23:16",
@@ -25,7 +25,7 @@
       "writedTo": "Destiny Udogie",
       "id": "e928ca44-8454-64d2-97a2-6f4312059404",
       "userId": "sonny",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/0e291d05-edf3-4c96-a384-6365e3976792.jpg"
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg"
     },
     {
       "createdAt": "2023. 12. 3. 오후 6:41:18",
@@ -34,7 +34,7 @@
       "writedTo": "Guglielmo Vicario",
       "id": "5b5fc954-9104-e65e-c2f9-750b569a962d",
       "userId": "sonny",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/0e291d05-edf3-4c96-a384-6365e3976792.jpg"
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg"
     },
     {
       "createdAt": "2023. 12. 3. 오후 7:58:10",
@@ -43,7 +43,7 @@
       "writedTo": "James Maddison",
       "id": "ce727c09-4484-63f1-cdaf-48a4a2e60ad5",
       "userId": "sonny",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/0e291d05-edf3-4c96-a384-6365e3976792.jpg"
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg"
     },
     {
       "createdAt": "2023. 12. 4. 오전 11:25:41",
@@ -71,6 +71,33 @@
       "writedTo": "Destiny Udogie",
       "id": "a0888ba6-53cd-11e7-2be2-3b220dba30f6",
       "userId": "qqqqqqqqq"
+    },
+    {
+      "createdAt": "2023. 12. 4. 오후 12:29:54",
+      "nickname": "손세이셔널",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg",
+      "content": "저장되나요",
+      "writedTo": "Heung-Min Son",
+      "id": "8685ce1d-ef38-6c5b-f345-0e323c134a00",
+      "userId": "sonny"
+    },
+    {
+      "createdAt": "2023. 12. 4. 오후 12:30:10",
+      "nickname": "손세이셔널",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg",
+      "content": "신기하다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ",
+      "writedTo": "Heung-Min Son",
+      "id": "faf3a476-d346-a762-15a7-688e9ffd7e55",
+      "userId": "sonny"
+    },
+    {
+      "createdAt": "2023. 12. 4. 오후 12:30:19",
+      "nickname": "손세이셔널",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/23-12-04/2961dea5-dc40-4938-b38e-84f7c7bbcc38.jpg",
+      "content": "오앙",
+      "writedTo": "Eric Dier",
+      "id": "def73c1b-3a26-8222-3812-8539a1e22727",
+      "userId": "sonny"
     }
   ]
 }
