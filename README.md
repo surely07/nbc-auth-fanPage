@@ -10,7 +10,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### 사이트 배포 주소
 
-[프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app)
+[프로젝트로 이동하기](nbc-auth-fan-page.vercel.app)
+
 <br>
 [json 서버 이동하기](https://standing-likeable-oviraptor.glitch.me)
 
