@@ -55,10 +55,7 @@ function ProfileModal({ setIsModalVisible }) {
       //     Authorization: `Bearer ${accessToken}`,
       //   },
       // });
-      console.log(result.data);
       const { nickname, avatar } = result.data;
-      dispatch(setUserNickName(nickname));
-      dispatch(setUserAvatar(avatar));
 
       // 로컬스토리지 저장
       localStorage.setItem("nickname", nickname);
@@ -76,6 +73,8 @@ function ProfileModal({ setIsModalVisible }) {
         });
 
       // state 변경
+      dispatch(setUserNickName(nickname));
+      dispatch(setUserAvatar(avatar));
 
       // json 서버 내용 가져오기
       const response = await axios.get("http://localhost:3001/letters");

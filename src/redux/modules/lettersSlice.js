@@ -14,6 +14,8 @@ export const __getLetters = createAsyncThunk(
     try {
       const response = await axios.get("http://localhost:3001/letters");
       console.log("response :", response);
+      response.data.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       console.log("error :", error);

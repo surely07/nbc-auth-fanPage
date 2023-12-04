@@ -17,6 +17,7 @@ function DetailBtn({ comment, editedContent, setEditedContent, id }) {
 
     await axios.delete(`http://localhost:3001/letters/${id}`);
     const response = await axios.get("http://localhost:3001/letters");
+    response.data.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
     navigate("/");
     dispatch(setLetter(response.data));

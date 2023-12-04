@@ -10,7 +10,9 @@ import { setMember } from "redux/modules/memberSlice";
 function InputBox() {
   const selectedMemberName = useSelector((state) => state.member);
   const dispatch = useDispatch();
-  const { userId, userNickName, avatar } = useSelector((state) => state.auth);
+  const { userId, userNickName, userAvatar } = useSelector(
+    (state) => state.auth
+  );
 
   // const [setName] = useState("");
   const [comment, setComment] = useState("");
@@ -24,7 +26,7 @@ function InputBox() {
     const newComment = {
       createdAt: String(now.toLocaleString()),
       nickname: userNickName,
-      avatar,
+      avatar: userAvatar,
       content: comment,
       writedTo: selectedMemberName,
       id: uuid(),
