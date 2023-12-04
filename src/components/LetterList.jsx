@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CommentInfoBox, CommentFont } from "style/Theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "common/Avatar";
+import { setMember } from "redux/modules/memberSlice";
 
 function LettersList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { letters, isLoading, error } = useSelector((state) => state.letters);
   const selectedMemberName = useSelector((state) => state.member);
-  const { userNickName } = useSelector((state) => state.auth);
+  // const { userNickName } = useSelector((state) => state.auth);
 
   const filteredComments =
     selectedMemberName !== "all"
       ? letters.filter((comment) => comment.writedTo === selectedMemberName)
       : letters;
+
+  useEffect(() => {
+    dispatch(setMember(selectedMemberName));
+  }, [dispatch, selectedMemberName]);
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -46,7 +52,7 @@ function LettersList() {
                   <CommentInfo>
                     <div>
                       <CommentFont fontSize="15px" fontWeight="500">
-                        {userNickName}
+                        {comment.nickname}
                       </CommentFont>
                       <CommentFont fontSize="11px">
                         {comment.createdAt}

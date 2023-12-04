@@ -5,7 +5,7 @@ import { MainDisplay } from "style/Theme";
 function Footer() {
   return (
     <MainDisplay>
-      <FooterStyle>Tottenham Hotspur Fan Page</FooterStyle>;
+      <FooterStyle>Tottenham Hotspur Fan Page</FooterStyle>
     </MainDisplay>
   );
 }

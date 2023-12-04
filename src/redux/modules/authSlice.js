@@ -4,7 +4,7 @@ import axios from "axios";
 const initialState = {
   // logData: {
   isSignedUp: true,
-  userId: "",
+  userId: localStorage.getItem("id") || "",
   userPassword: "",
   userNickName: "",
   userAvatar: null,

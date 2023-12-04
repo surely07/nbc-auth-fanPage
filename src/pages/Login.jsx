@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-// import { Cookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,14 +8,14 @@ import {
   setUserNickName,
   setUserAvatar,
   signUp,
+  logIn,
 } from "redux/modules/authSlice";
 import styled from "styled-components";
-import { logIn } from "redux/modules/authSlice";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSignedUp, userId, userPassword, userNickName, isLoggedIn } =
+  const { isLoggedIn, isSignedUp, userId, userPassword, userNickName } =
     useSelector((state) => state.auth);
 
   const onLogInButtonHandler = async (e) => {
@@ -38,7 +37,7 @@ function Login() {
       localStorage.setItem("id", response.data.userId);
       localStorage.setItem("nickname", response.data.nickname);
       localStorage.setItem("avatar", response.data.avatar);
-      console.log(accessToken);
+      localStorage.setItem("isLoggedIn", "true");
 
       const getUser = await axios.get(`${BASE_URL}/user`, {
         headers: {
@@ -54,10 +53,9 @@ function Login() {
         dispatch(setUserNickName(nickname));
         dispatch(setUserAvatar(avatar));
 
-        console.log(userId);
-
         setTimeout(() => {
           console.log(isLoggedIn);
+          dispatch(logIn(true));
           navigate("/");
         }, 0);
       }

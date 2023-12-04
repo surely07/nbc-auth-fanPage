@@ -10,7 +10,7 @@ import { setMember } from "redux/modules/memberSlice";
 function InputBox() {
   const selectedMemberName = useSelector((state) => state.member);
   const dispatch = useDispatch();
-  const { userNickName, avatar } = useSelector((state) => state.auth);
+  const { userId, userNickName, avatar } = useSelector((state) => state.auth);
 
   // const [setName] = useState("");
   const [comment, setComment] = useState("");
@@ -28,6 +28,7 @@ function InputBox() {
       content: comment,
       writedTo: selectedMemberName,
       id: uuid(),
+      userId,
     };
 
     if (!comment) {
@@ -46,7 +47,7 @@ function InputBox() {
     <div>
       <PostBox onSubmit={commentSubmitHandler} id={comment}>
         <div>
-          <label htmlFor="nickname">닉네임</label>
+          <label>닉네임</label>
           {userNickName}
         </div>
         <div>

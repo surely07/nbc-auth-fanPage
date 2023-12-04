@@ -7,7 +7,6 @@ import Login from "pages/Login";
 import Profile from "pages/Profile";
 import ProtectedRoute from "./ProtectedRoute";
 import Layout from "components/Layout";
-// import Layout from "components/Layout";
 
 const Router = () => {
   return (

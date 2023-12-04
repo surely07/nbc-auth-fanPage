@@ -35,10 +35,10 @@ const lettersSlice = createSlice({
       return state.filter((letter) => letter.id !== letterId);
     },
     editLetter: (state, action) => {
-      const { id, editedContent } = action.payload;
+      const { userId, nickname, avatar, editedContent } = action.payload;
       return state.map((letter) => {
-        if (letter.id === id) {
-          return { ...letter, content: editedContent };
+        if (letter.userId === userId) {
+          return { ...letter, content: editedContent, nickname, avatar };
         }
         return letter;
       });
