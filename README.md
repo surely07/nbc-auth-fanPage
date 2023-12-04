@@ -9,11 +9,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - 필터를 통해 선택된 선수들의 팬레터만 모아볼 수 있습니다.
 
 ### 사이트 배포 주소
-
-[프로젝트로 이동하기](nbc-auth-fan-page.vercel.app)
+[프로젝트로 이동하기](https://nbc-auth-fan-page.vercel.app/)
 
 <br>
-[json 서버 이동하기](https://standing-likeable-oviraptor.glitch.me)
+
+[json 서버 이동하기](https://standing-likeable-oviraptor.glitch.me/)
 
 
 
