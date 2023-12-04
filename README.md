@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Fanpage Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### 소개
 
-In the project directory, you can run:
+- 토트넘의 회원제 팬페이지로, 회원가입 및 로그인이 된 user들은 선수들에게 팬레터를 작성할 수 있습니다.
+- 프로필 변경(닉네임 및 프로필 이미지)이 가능합니다.
+- 필터를 통해 선택된 선수들의 팬레터만 모아볼 수 있습니다.
 
-### `yarn start`
+### 사이트 배포 주소
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app)
+<br>
+[json 서버 이동하기](https://wave-quartz-dracopelta.glitch.me)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 사이트 미리보기
 
-### `yarn test`
+![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/95daa9f9-75e7-44a7-8de3-d1eeb1a8fcad)
+![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/db31f8f8-3b45-45dc-8c95-13ac20901752)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 기술 스택 및 사용 라이브러리
 
-### `yarn build`
+- react
+- redux
+- react-router-dom
+- styled-components
+- uuid
+- axios
+- redux toolkit
+- redux thunk
+- json-server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 프로젝트 설치
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### clone repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/surely07/nbc-auth-fanPage.git
+```
 
-### `yarn eject`
+### Install npm dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+yarn
+yarn install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Start dev-server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+yarn start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 요구사항
 
-## Learn More
+### 필수 구현 사항
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### - 홈 화면 UI 수정 (Create, Read)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ✔️ 회원가입 시 작성한 닉네임 값으로 팬레터 UI 수정
 
-### Code Splitting
+##### 상세 화면 UI 구현 (Read, Update, Delete)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- ❌ 본인이 작성한 게시글에만 수정, 삭제 권한 부여
 
-### Analyzing the Bundle Size
+##### 로그인/회원가입 UI 구현
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- ✔️ 로그인 해야만 Home, Detail, Profile 페이지 접속 가능
+- ✔️ 기본 페이지는 로그인 페이지
+- ❌ 회원가입 기능 구현
+- ✔️ 로그인, 회원가입 창 토글링
 
-### Making a Progressive Web App
+#### 프로필관리 UI 구현
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- ✔️ Profile 페이지 UI 구현
+- ✔️ 프로필 이미지, 닉네임 수정 기능 구현, 수정 후 letter list에 자동 반영
 
-### Advanced Configuration
+##### 배포하기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- ✔️ Vercel 이라는 호스팅플랫폼을 이용해 배포
+- ✔️ 배포에 적용될 브랜치는 redux-thunk 브랜치로 적용
