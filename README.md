@@ -8,12 +8,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - 필터를 통해 선택된 선수들의 팬레터만 모아볼 수 있습니다.
  
 ### 사이트 배포 주소
-[프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app/)
+[프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app)
+[json 서버 이동하기](https://wave-quartz-dracopelta.glitch.me)
+
 
 ### 사이트 미리보기
 ![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/95daa9f9-75e7-44a7-8de3-d1eeb1a8fcad)
 ![image](https://github.com/surely07/nbc-auth-fanPage/assets/147504785/db31f8f8-3b45-45dc-8c95-13ac20901752)
-
 
 
 ## 기술 스택 및 사용 라이브러리
