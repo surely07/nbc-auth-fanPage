@@ -12,7 +12,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [프로젝트로 이동하기](nbc-auth-fan-page-pja8mdpw9-borakwons-projects.vercel.app)
 <br>
-[json 서버 이동하기](https://wave-quartz-dracopelta.glitch.me)
+[json 서버 이동하기](https://standing-likeable-oviraptor.glitch.me)
+
+
 
 ### 사이트 미리보기
 
