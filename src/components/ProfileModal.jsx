@@ -8,7 +8,7 @@ import { setLetter } from "redux/modules/lettersSlice";
 
 function ProfileModal({ setIsModalVisible }) {
   const dispatch = useDispatch();
-  const { userAvata, userNickName, userId } = useSelector(
+  const { userAvatar, userNickName, userId } = useSelector(
     (state) => state.auth
   );
   const { letters } = useSelector((state) => state.letters);
@@ -16,64 +16,72 @@ function ProfileModal({ setIsModalVisible }) {
   const [tempUserNickName, setTempUserNickName] = useState(userNickName);
   const [selectedAvatarFile, setSelectedAvatarFile] = useState(null);
 
-  const editAvataHandler = (e) => {
+  const onEditAvataHandler = (e) => {
     const file = e.target.files[0];
     setSelectedAvatarFile(file);
   };
 
   const onEditNicknameHandler = (e) => {
-    e.preventDefault();
     setTempUserNickName(e.target.value);
   };
 
-  const saveBtnHandler = async () => {
+  const cancelBtnHandler = () => {
+    setIsModalVisible(false);
+  };
+
+  const onSubmitUserInfoHandler = async () => {
     const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
     const accessToken = localStorage.getItem("accessToken");
     console.log(accessToken);
 
+    if (!accessToken) return;
+
     try {
+      // 이미지 파일, 닉네임 formData에 담아서 프로필 변경 요청
       const formData = new FormData();
       formData.append("avatar", selectedAvatarFile);
       formData.append("nickname", tempUserNickName);
 
-      await axios.patch(
-        `${BASE_URL}/profile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-        // { withCredentials: true }
-      );
-      const getUser = await axios.get(`${BASE_URL}/user`, {
+      const result = await axios.patch(`${BASE_URL}/profile`, formData, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
         },
       });
-      const { nickname, avatar } = getUser.data;
 
+      // const getUser = await axios.get(`${BASE_URL}/user`, {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${accessToken}`,
+      //   },
+      // });
+      console.log(result.data);
+      const { nickname, avatar } = result.data;
+      dispatch(setUserNickName(nickname));
+      dispatch(setUserAvatar(avatar));
+
+      // 로컬스토리지 저장
       localStorage.setItem("nickname", nickname);
       localStorage.setItem("avatar", avatar);
 
-      dispatch(setUserNickName(nickname));
-      dispatch(setUserAvatar(avatar));
-      console.log(userNickName);
-
+      // json 서버 수정(userId 같은 것 찾아서 모두 변경)
       letters
         .filter((comment) => comment.userId === userId)
         .map(async (letter) => {
           const id = letter.id;
           await axios.patch(`http://localhost:3001/letters/${id}`, {
-            avatar: userAvata,
-            nickname: userNickName,
+            avatar,
+            nickname,
           });
         });
 
+      // state 변경
+
+      // json 서버 내용 가져오기
       const response = await axios.get("http://localhost:3001/letters");
       console.log(response.data);
+
+      // json서버 내용을 기반으로 letters 변경
       dispatch(setLetter(response.data));
       setIsModalVisible(false);
     } catch (error) {
@@ -82,17 +90,13 @@ function ProfileModal({ setIsModalVisible }) {
     }
   };
 
-  const cancelBtnHandler = () => {
-    setIsModalVisible(false);
-  };
-
   return (
     <StOverlay>
       <StLoginContainer>
         <label htmlFor="edit-user-nickname">회원정보 수정</label>
         <StLoginForm>
-          <Avatar src={userAvata} />
-          <input type="file" accept="image/*" onChange={editAvataHandler} />
+          <Avatar src={userAvatar} />
+          <input type="file" accept="image/*" onChange={onEditAvataHandler} />
           <input
             id="edit-user-nickname"
             value={tempUserNickName}
@@ -106,7 +110,9 @@ function ProfileModal({ setIsModalVisible }) {
         <StLoginBtn $backgroundColor="lightgray" onClick={cancelBtnHandler}>
           취소
         </StLoginBtn>
-        <StLoginBtn onClick={saveBtnHandler}>저장</StLoginBtn>
+        <StLoginBtn type="submit" onClick={onSubmitUserInfoHandler}>
+          저장
+        </StLoginBtn>
       </StLoginContainer>
     </StOverlay>
   );
